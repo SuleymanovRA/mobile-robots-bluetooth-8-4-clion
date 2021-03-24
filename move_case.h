@@ -1,3 +1,7 @@
+// Шаг времени работы двигателей (мксек)
+const int MOVE_TIME_STEP = 50;
+// Время одного цикла работы двигателей (мксек)
+const int FULL_MOVE_TIME = MOVE_TIME_STEP * 10;
 // Пременная изменения скорости.
 unsigned long  _move_time;
 // == Выбор действий
@@ -40,48 +44,22 @@ void move_case(char bt_input)
     case 'S':
       _stop();
       break;
-    // Скорость 0%
+    // Скорость 0%, 10%, 20%, ..., 90%
     case '0':
-      _move_time = 0;
-      break;
-    // Скорость 10%
     case '1':
-      _move_time = 50;
-      break;
-    // Скорость 20%
     case '2':
-      _move_time = 100;
-      break;
-    // Скорость 30%
     case '3':
-      _move_time = 150;
-      break;
-    // Скорость 40%
     case '4':
-      _move_time = 200;
-      break;
-    // Скорость 50%
     case '5':
-      _move_time = 250;
-      break;
-    // Скорость 60%
     case '6':
-      _move_time = 300;
-      break;
-    // Скорость 70%
     case '7':
-      _move_time = 350;
-      break;
-      // Скорость 80%
-      _move_time = 400;
-      break;
-    // Скорость 90%
+    case '8':
     case '9':
-      _move_time = 450;
+      _move_time = MOVE_TIME_STEP * (bt_input - 48);
       break;
     // Скорость 100%
     case 'q':
-      _move_time = 500;
+      _move_time = FULL_MOVE_TIME;
       break;
     case 'X':
       //switch_rejim = 1;
@@ -94,4 +72,3 @@ void move_case(char bt_input)
       break;
   }
 }
-

@@ -2,10 +2,8 @@
 #include <SoftwareSerial.h>
 #include "motor.h"
 #include "move_case.h"
-//Создаем последовательный порт на пинах 13-чтение и 2-передача.
+// Создаем последовательный порт на пинах 10-чтение и 11-передача.
 SoftwareSerial BTSerial(10, 11); // RX, TX
-// Переменная для приема данных по Bluetooth.
-char bt_input;
 // Хранит время последнего нажатия кнопки.
 unsigned long _time;
 //=================================//
@@ -20,7 +18,7 @@ void setup()
   BTSerial.begin(9600);
   // Переключаем A0 в двоичный режим работы, на передачу.
   // если вы его еще не отключили
-  pinMode(14, OUTPUT);
+//  pinMode(14, OUTPUT);
   // Устанавливаем скорость передачи данных по кабелю.
   // Порт компьютера
   //Serial.begin(9600);
@@ -29,6 +27,8 @@ void setup()
 // Основная программа.
 void loop()
 {
+  // Переменная для приема данных по Bluetooth.
+  char bt_input;
   if (BTSerial.available())
   {
     // Читаем команду и заносим ее в переменную. char преобразует
@@ -45,12 +45,9 @@ void loop()
   {
     _stop();
   }
-  if ((micros() - _time) >= 500)
+  if ((micros() - _time) >= FULL_MOVE_TIME)
   {
     _time = micros();
     move_case(bt_input);
   }
 }
-
-
-
