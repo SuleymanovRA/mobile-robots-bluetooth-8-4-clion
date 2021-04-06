@@ -1,3 +1,4 @@
+#include <Arduino.h>
 // Подключаем библиотеку для создания дополнительных последовательных (Serial) портов.
 #include <SoftwareSerial.h>
 #include "motor.h"
